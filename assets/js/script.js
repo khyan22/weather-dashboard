@@ -125,8 +125,18 @@ var getWeather = function(currentCity) {
         });
 }
 
+//search history array
+var searchHistory = JSON.parse(localStorage.getItem("history")) || [];
+
+//search city function
 $("#searchBtn").on("click", function() {
-    var search = $("#searchedCity").val()
+    var search = $("#searchedCity").val();
+    var historyItem = document.createElement("li");
+    var deleteBtn = document.createElement("button");
+    var index = searchHistory.length
+
+
+
     getWeather(search);
     $("#searchCity").val("")
 });
