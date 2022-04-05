@@ -10,7 +10,7 @@
     <title>Weather Dashboard | Home</title>
 </head>
 
-<body class="bg-secondary">
+<body class="bg-success">
     <header class="col-12 bg-dark">
         <h1 class="text-center text-secondary fs-1">
             Weather Dashboard
@@ -20,14 +20,14 @@
     <main class="container-fluid row">
 
         <!-- side bar -->
-        <section class="row col-xl-2 col-sm-12">
-            <h2 class="mt-2 mb-2 text-light">
+        <section class="col-xl-2 col-sm-12">
+            <!-- <h2 class="mt-2 mb-2 text-light">
                 Search for a city:
-            </h2>
+            </h2> -->
 
             <!-- search bar -->
-            <div class="input-group mb-3">
-                <input id="searchedCity" type="text" placeholder="Enter City Here" class="form-control" aria-label="Enter City Here" aria-describedby="searchBtn">
+            <div class="input-group mt-5 mb-3">
+                <input id="searchedCity" type="text" placeholder="Enter City Here" class="form-control " aria-label="Enter City Here" aria-describedby="searchBtn">
                 <button class="btn btn-primary btn-outline-primary border border-light" type="button" id="searchBtn"><i class="fas fa-search"></i></button>
             </div>
 
@@ -38,20 +38,21 @@
 
 
         <section class="col-xl-10 col-sm-12 justify-content-center">
-            <div class="border border-light rounded mt-5 mb-5 text-center text-light">
+            <div class="rounded mt-5 mb-5 text-center text-light">
                 <!-- current weather -->
-                <div class="border border-light rounded mt-5 mb-5 text-center text-light">
+                <div class="border border-light rounded mt-5 mb-5 text-center text-light bg-secondary">
                     <h3 id="currentCity" class="mt-5"></h3>
                     <h3 id="currentDate" class=""></h3>
+                    <img id="weatherImg" alt="">
                     <p id="temp"></p>
                     <p id="wind"></p>
                     <p id="humidity"></p>
-                    <p id="UV"></p>
+                    <p id="uv"></p>
                 </div>
 
                 <!-- forecast -->
                 <h4 class="text-light text-center"></h4>
-                <div class="border border-light rounded row justify-content-around" id="forecastSection">
+                <div class="border border-light rounded d-flex justify-content-around" id="forecastSection">
 
                 </div>
             </div>
