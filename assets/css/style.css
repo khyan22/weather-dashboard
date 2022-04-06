@@ -1,0 +1,8 @@
+
+ul{
+    list-style: none;
+}
+
+.pastSearch:hover {
+    cursor: pointer;
+}

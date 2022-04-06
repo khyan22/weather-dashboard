@@ -133,10 +133,87 @@ $("#searchBtn").on("click", function() {
     var search = $("#searchedCity").val();
     var historyItem = document.createElement("li");
     var deleteBtn = document.createElement("button");
-    var index = searchHistory.length
+    var index = searchHistory.length;
 
-
-
+    //weather function call
     getWeather(search);
-    $("#searchCity").val("")
+
+    //set attributes
+    deleteBtn.setAttribute("type", "button");
+    historyItem.setAttribute("id", index);
+
+    //classes
+    $(deleteBtn).addClass("btn btn-danger btn-outline btn-outline-light border border-light deleteBtn");
+    $(historyItem).addClass("list-group-item text-light bg-dark text-center border border-light pastSearch");
+
+    //inner HTML
+    deleteBtn.innerHTML = "<li class='fa fa-trash' aria-hidden='true'><li>";
+    historyItem.innerHTML = search + "<br />";
+
+    //append 
+    $(historyItem).append(deleteBtn);
+    $("#searchHistory").append(historyItem);
+
+    //delete click function
+    $(deleteBtn).on("click", function() {
+        var deleteId = $(this).parent().attr("id");
+        $(this).parent("li").remove();
+        historyItem.splice(deleteId, 1);
+        localStorage.setItem("history", JSON.stringify(searchHistory));
+        displayHistory()
+    })
+
+    //localStorage
+    searchHistory.push(search);
+    localStorage.setItem("history", JSON.stringify(searchHistory));
+    index++
+
+    //reset search bar
+    $("#searchedCity").val("")
 });
+
+//display history
+var displayHistory = function() {
+
+    //clear history
+    $("#searchHistory").empty();
+
+    //generate history
+    for(i = 0; i < searchHistory.length; i++) {
+        var historyCity = searchHistory[i];
+        var historySearch = document.createElement("li");
+        var historyDelete = document.createElement("button");
+
+        //attributes
+        historyDelete.setAttribute("type", "button");
+        historySearch.setAttribute("id", i);
+
+        //classes
+        $(historyDelete).addClass("btn btn-danger btn-outline-light border-light");
+        $(historySearch).addClass("list-group-item text-light bg-dark text-center border-light fs-3 pastSearch");
+
+        //innerHtml
+        historyDelete.innerHTML = '<i class="fa fa-trash" aria-hidden="true"><li>';
+        historySearch.innerHTML = historyCity + "<br />";
+
+        //append
+        $(historySearch).append(historyDelete);
+        $("#searchHistory").append(historySearch);
+
+        //history click function
+        $(historySearch).on("click", function() {
+            getWeather($(this).text())
+        })
+
+        //delete click function
+        $(historyDelete).on("click", function() {
+            $(this).parent("li").remove();
+            var deleteId = $(this).parent().attr("id");
+            searchHistory.splice(deleteId, [i]);
+            localStorage.setItem("history", JSON.stringify(searchHistory))
+            displayHistory()
+        })
+    }
+}
+
+displayHistory()
